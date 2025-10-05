@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+    <nav class="navbar navbar-expand-lg border-bottom">
       <div class="container-xxl">
         <a class="navbar-brand" href="#">My Vue App</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -15,7 +14,6 @@
     <main>
       <router-view />
     </main>
-  </div>
 </template>
 
 <script setup>
