@@ -25,7 +25,7 @@ app.use(pinia)
 // import the store after pinia is registered
 import { useThemeStore } from './stores/theme'
 const themeStore = useThemeStore(pinia)
-const saved = localStorage.getItem('theme') || themeStore.theme
+const saved = localStorage.getItem('theme') || themeStore.theme || 'dark'
 themeStore.setTheme(saved)
 
 app.provide('apiBaseUrl', apiBaseUrl)

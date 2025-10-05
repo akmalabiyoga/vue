@@ -21,3 +21,34 @@
     </div>
   </div>
 </template>
+
+<script setup>
+import { ref } from 'vue'
+import { apiFetch } from './services/api'
+import axios from 'axios'
+import { useRouter } from 'vue-router'
+const router = useRouter()
+const username = ref('')
+const password = ref('')
+async function loginUser() {
+  try {
+    const body = {
+      username: username.value,
+      password: password.value
+    }
+    // const data = await apiFetch('/users/login', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify(body)
+    // })
+    const { data } = await axios.post('http://localhost:3000/users/login', body)
+    console.log('Login successful:', data)
+    // Store the token in localStorage or a cookie
+    localStorage.setItem('token', data.token)
+    // Redirect to home page after successful login
+    router.push('/')
+  } catch (error) {
+    console.error('Login error:', error)
+  }
+}
+</script>

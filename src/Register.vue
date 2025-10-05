@@ -13,6 +13,10 @@
             <input type="email" class="form-control" id="email" v-model="email" required />
           </div>
           <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" v-model="name" required />
+          </div>
+          <div class="mb-3">
             <label for="password" class="form-label">Password</label>
             <input type="password" class="form-control" id="password" v-model="password" required />
           </div>
@@ -22,3 +26,52 @@
     </div>
   </div>
 </template>
+
+<script setup>
+import { ref } from 'vue'
+import { apiFetch } from './services/api'
+import axios from 'axios'
+import { useRouter } from 'vue-router'
+const router = useRouter()
+const username = ref('')
+const email = ref('')
+const name = ref('')
+const password = ref('')
+// async function registerUser() {
+//   try {
+//     const body = {
+//       username: username.value,
+//       email: email.value,
+//       name: name.value,
+//       password: password.value
+//     }
+//     const data = await apiFetch('/users/register', {
+//       method: 'POST',
+//       headers: { 'Content-Type': 'application/json' },
+//       body: JSON.stringify(body)
+//     })
+//     console.log('Registration successful:', data)
+//     // Redirect to login page after successful registration
+//     router.push('/login')
+//   } catch (error) {
+//     console.error('Registration error:', error)
+//   }
+// }
+// use axios
+async function registerUser() {
+  try {
+    const body = {
+      username: username.value,
+      email: email.value,
+      name: name.value,
+      password: password.value
+    }
+    const response = await axios.post('http://localhost:3000/users/register', body)
+    console.log('Registration successful:', response.data)
+    // Redirect to login page after successful registration
+    router.push('/login')
+  } catch (error) {
+    console.error('Registration error:', error)
+  }
+}
+</script>
